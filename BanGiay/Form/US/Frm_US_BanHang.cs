@@ -47,20 +47,20 @@ namespace BanGiay.Form.US
             int stt = 1;
             dgv_HD.ColumnCount = 9;
             dgv_HD.Columns[0].Name = "STT";
-            dgv_HD.Columns[1].Name = "Mã hoá đơn";
-            dgv_HD.Columns[2].Name = "Tên ưu đãi";
-            dgv_HD.Columns[3].Name = "Ngày tạo";
-            dgv_HD.Columns[4].Name = "Người tạo";
-            dgv_HD.Columns[5].Name = "Tên Khách hàng";
-            dgv_HD.Columns[6].Name = "Hình thức thanh toán";
-            dgv_HD.Columns[7].Name = "Tổng tiền";
-            dgv_HD.Columns[8].Name = "Trạng thái";
+            //dgv_HD.Columns[1].Name = "Mã hoá đơn";
+            dgv_HD.Columns[1].Name = "Tên ưu đãi";
+            dgv_HD.Columns[2].Name = "Ngày tạo";
+            dgv_HD.Columns[3].Name = "Người tạo";
+            dgv_HD.Columns[4].Name = "Tên Khách hàng";
+            dgv_HD.Columns[5].Name = "Hình thức thanh toán";
+            dgv_HD.Columns[6].Name = "Tổng tiền";
+            dgv_HD.Columns[7].Name = "Trạng thái";
 
             dgv_HD.Rows.Clear();
             _lstHoaDon = _Ser_HoaDon.GetAll("false", "Trạng thái hóa đơn");
             foreach (var x in _lstHoaDon)
             {
-                dgv_HD.Rows.Add(stt++, x.Hoadon.Mahoadon, x.tenUuDai, x.Hoadon.Ngaytao, x.tenTaiKhoan, x.tenKhachHang, x.tenHinhThucThanhToan, x.Hoadon.Tongtien == null ? "N/A" : x.Hoadon.Tongtien, x.Hoadon.Trangthai == true ? "Đã thanh toán" : "Chưa thanht toán");
+                dgv_HD.Rows.Add(stt++, x.tenUuDai, x.Hoadon.Ngaytao, x.tenTaiKhoan, x.tenKhachHang, x.tenHinhThucThanhToan, x.Hoadon.Tongtien == null ? "N/A" : x.Hoadon.Tongtien, x.Hoadon.Trangthai == true ? "Đã thanh toán" : "Chưa thanht toán");
             }
 
             dgv_HD.Columns[0].Width = 30;
@@ -784,14 +784,20 @@ namespace BanGiay.Form.US
         }
         private void LoadTien_ThanhToan()
         {
-            var objUuDai = _ser_UuDai.GetUudai_InTime();
+            var objUuDai = _ser_UuDai.GetUudais(null);
             var Obj = _Ser_KhachHang.GetAllKhachhang(null).FirstOrDefault(x => x.Makhachhang == (txtMaKhachhang.Text == "N/A" ? 1 : int.Parse(txtMaKhachhang.Text)));
             txtTongTienSP.Text = TinhTongTien_HoaDon(dgvHDCT).ToString();
-            txtTongTien.Text = (TinhTongTien_HoaDon(dgvHDCT)
-                - (int.Parse(txtTongTienSP.Text)
-                * ((objUuDai.Soluong <= 0 ? 0 : double.Parse("0," + objUuDai.Phantram))))
-                - ((chbox_Dung_DiemKH.Checked ? (Obj.Diemkhachhang == null || txtDiem_KH.Text == "" ? 0 : Obj.Diemkhachhang) : 0)
-                * 1000)).ToString();
+            foreach (var x in objUuDai)
+            {
+                if (cbb_giamgia.Text == x.Tenuudai)
+                {
+                    txtTongTien.Text = (TinhTongTien_HoaDon(dgvHDCT)
+                                        - (int.Parse(txtTongTienSP.Text)
+                                           * ((x.Soluong <= 0 ? 0 : float.Parse($"{x.Phantram * 0,01}"))))
+                                        - ((chbox_Dung_DiemKH.Checked ? (Obj.Diemkhachhang == null || txtDiem_KH.Text == "" ? 0 : Obj.Diemkhachhang) : 0)
+                                           * 1000)).ToString();
+                }
+            }
 
         }
         private void btnXoaHoaDon_Click(object sender, EventArgs e)

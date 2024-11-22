@@ -58,7 +58,7 @@ namespace DAL.Repositories
         {
             DateTime now = DateTime.Now;
 
-            var obj = dbContext.Uudais.Where(a => a.Ngaybatdau <= a.Ngayketthuc && a.Ngayketthuc >= now&&a.Trangthai==2).FirstOrDefault() ;
+            var obj = dbContext.Uudais.Where(a =>a.Ngaybatdau <= now && a.Ngayketthuc >= now && a.Trangthai==2).FirstOrDefault() ;
             if(obj == null)
             {
                 return dbContext.Uudais.Where(a => a.Mauudai ==1).FirstOrDefault();

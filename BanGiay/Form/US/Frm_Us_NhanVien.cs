@@ -42,29 +42,27 @@ namespace BanGiay.Form.US
             int stt = 1;
             dgvHienThi.ColumnCount = 13;
             dgvHienThi.Columns[0].Name = "STT";
-            dgvHienThi.Columns[1].Name = "Mã";
-            dgvHienThi.Columns[2].Name = "UserName";
-            dgvHienThi.Columns[3].Name = "Password";
-            dgvHienThi.Columns[4].Name = "Tên";
-            dgvHienThi.Columns[5].Name = "Giới tính";
-            dgvHienThi.Columns[6].Name = "SĐT";
-            dgvHienThi.Columns[7].Name = "Địa chỉ";
-            dgvHienThi.Columns[8].Name = "Email";
-            dgvHienThi.Columns[9].Name = "Ngày sinh";
-            dgvHienThi.Columns[9].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvHienThi.Columns[10].Name = "Chức vụ";
-            dgvHienThi.Columns[11].Name = "Ngày tạo";
-            dgvHienThi.Columns[11].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvHienThi.Columns[12].Name = "Trạng thái";
+            //dgvHienThi.Columns[1].Name = "Mã";
+            dgvHienThi.Columns[1].Name = "UserName";
+            dgvHienThi.Columns[2].Name = "Password";
+            dgvHienThi.Columns[3].Name = "Tên";
+            dgvHienThi.Columns[4].Name = "Giới tính";
+            dgvHienThi.Columns[5].Name = "SĐT";
+            dgvHienThi.Columns[6].Name = "Địa chỉ";
+            dgvHienThi.Columns[7].Name = "Email";
+            dgvHienThi.Columns[8].Name = "Ngày sinh";
+            dgvHienThi.Columns[8].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dgvHienThi.Columns[9].Name = "Chức vụ";
+            dgvHienThi.Columns[10].Name = "Ngày tạo";
+            dgvHienThi.Columns[10].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dgvHienThi.Columns[11].Name = "Trạng thái";
 
             dgvHienThi.Rows.Clear();
 
             foreach (var x in _service.GetTaikhoan(search))
             {
-
-                var idcv = _service.GetChucvu().FirstOrDefault(e => e.Machucvu == x.Machucvu);
-                dgvHienThi.Rows.Add(stt++, x.Mataikhoan, x.Username, x.Pasword, x.Hovaten, x.Gioitinh == true ? "Nam" : "Nữ", x.Sodienthoai
-                    , x.Diachi, x.Email, x.Ngaysinh, idcv.Tenchucvu, x.Ngaytaotaikhoan, x.Trangthai == false ? "Nghỉ làm" : "Đi làm");
+                dgvHienThi.Rows.Add(stt++, x.Username, x.Pasword, x.Hovaten, x.Gioitinh == true ? "Nam" : "Nữ", x.Sodienthoai
+                    , x.Diachi, x.Email, x.Ngaysinh, x.MachucvuNavigation.Tenchucvu, x.Ngaytaotaikhoan, x.Trangthai == false ? "Nghỉ làm" : "Đi làm");
             }
         }
         private void dgvHienThi_CellClick(object sender, DataGridViewCellEventArgs e)
