@@ -3,15 +3,7 @@ using DAL.Models.Context;
 using DAL.Models.DomainClass;
 using DAL.Models.ModelRefer;
 using PRL.Frm_Main;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace BanGiay.Form.US
 {
@@ -131,7 +123,6 @@ namespace BanGiay.Form.US
             cbbHinhThucThanhToan.DisplayMember = "TENHINHTHUC";
             cbbHinhThucThanhToan.ValueMember = "MAHINHTHUCTHANHTOAN";
             cbbHinhThucThanhToan.SelectedIndex = 0;
-
         }
         private void dgv_HD_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -163,7 +154,7 @@ namespace BanGiay.Form.US
                 {
                     MessageBox.Show("Đã hủy 'chọn' hóa đơn này");
                 }
-                txtTongTienSP.Text = TinhTongTien_HoaDon(dgvHDCT).ToString();
+                txtTongTienSP.Text = TinhTongTien_HoaDon(dgvHDCT).ToString("N0");
                 LoadTien_ThanhToan();
 
             }
@@ -175,6 +166,9 @@ namespace BanGiay.Form.US
 
 
         }
+
+        #region Thêm Sản Phẩm vào Hóa Đơn
+
         private void dgvSP_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -247,7 +241,7 @@ namespace BanGiay.Form.US
                     objHoaDon_TongTien.Tongtien = TinhTongTien_HoaDon(dgvHDCT);
                     _Ser_HoaDon.Sua(int.Parse(txtMaHoaDon.Text), objHoaDon_TongTien);
                     LoadGridHD(null, null);
-
+                    LoadTien_ThanhToan();
                 }
                 else
                 {
@@ -263,19 +257,25 @@ namespace BanGiay.Form.US
                     MessageBox.Show($"Không đủ số lượng! Chỉ còn {objCellClick.giaychitiet.Soluongcon} đôi.");
                 }
                 LoadGridSP(null, null);
-                txtTongTienSP.Text = TinhTongTien_HoaDon(dgvHDCT).ToString();
+                txtTongTienSP.Text = TinhTongTien_HoaDon(dgvHDCT).ToString("N0");
                 LoadTien_ThanhToan();
             }
             catch (Exception ex)
             {
 
-                Console.WriteLine($"Thông tin chi tiết: {ex.ToString()}");
+                MessageBox.Show($"Thông tin chi tiết: {ex.ToString()}");
             }
         }
+
+        #endregion
+
         private void pictureBox3_Click(object sender, EventArgs e)
         {
             LoadGridSP(null, null);
         }
+
+        #region Thêm Hóa Đơn
+
         private void ptbThemHoaDon_Click(object sender, EventArgs e)
         {
             try
@@ -286,9 +286,11 @@ namespace BanGiay.Form.US
                 if (confirmResult == DialogResult.OK)
                 {
                     var result = _Ser_HoaDon.Them(new Hoadon()
+
                     {
                         Mataikhoan = LoginManager.Instance.IdTaiKhoan,
-                        Mauudai = objUuDai.Mauudai == null ? 1 : objUuDai.Mauudai,
+                        // Nếu Mauudai là null, sử dụng giá trị mặc định là 1
+                        Mauudai = objUuDai != null && objUuDai.Mauudai != 0 ? objUuDai.Mauudai : 1,  // Sử dụng toán tử null-coalescing (??)
                         Makhachhang = 1,
                         Mahinhthucthanhtoan = 1,
                         Tencuahang = "",
@@ -296,7 +298,8 @@ namespace BanGiay.Form.US
                         Sdtcuahang = "",
                         Emailcuahang = "",
                         Ngaytao = dateTime,
-                        Tongtien = null,
+                        // Nếu Tongtien có thể là null, để lại null, nếu không cần đảm bảo giá trị hợp lý
+                        Tongtien = null,  // Đảm bảo kiểu dữ liệu của Tongtien có thể nhận null nếu bạn sử dụng null
                         Ghichu = "",
                         Trangthai = false
                     });
@@ -324,6 +327,9 @@ namespace BanGiay.Form.US
             }
 
         }
+
+        #endregion
+
         private void ptbChonKhachHang_Click(object sender, EventArgs e)
         {
             if (txtMaHoaDon.Text == "N/A" || txtMaHoaDon.Text == "N/A")
@@ -356,6 +362,9 @@ namespace BanGiay.Form.US
             txtMaNhanVien.Text = LoginManager.Instance.IdTaiKhoan.ToString();
             txtDiem_KH.Text = Obj.Diemkhachhang == null ? "0 điểm" : Obj.Diemkhachhang.ToString() + " điểm";
         }
+
+        #region Xóa Sản Phẩm trong Hóa Đơn
+
         private void btnXoa_Click(object sender, EventArgs e)
         {
             int soluongMuonXoa = (int)txtSoLuongMuonXoa.Value;
@@ -422,7 +431,7 @@ namespace BanGiay.Form.US
                         MessageBox.Show("Đã hủy 'xóa' hóa đơn");
                     }
                     idHoaDonChiTiet_Clicked.Clear();
-                    txtTongTienSP.Text = TinhTongTien_HoaDon(dgvHDCT).ToString();
+                    txtTongTienSP.Text = TinhTongTien_HoaDon(dgvHDCT).ToString("N0");
                     LoadTien_ThanhToan();
                 }
                 catch (Exception ex)
@@ -431,6 +440,9 @@ namespace BanGiay.Form.US
                 }
             }
         }
+
+        #endregion
+
         private void dgvHDCT_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == dgvHDCT.Columns["Chon"].Index && e.RowIndex >= 0)
@@ -556,21 +568,37 @@ namespace BanGiay.Form.US
         }
         private void LoadMaGiamGia()
         {
-            var objUuDai = _ser_UuDai.GetUudais(null);
-            if (objUuDai != null && objUuDai.Any())
+            var danhSachUuDai = _ser_UuDai.GetUudais(null); // Lấy danh sách tất cả các ưu đãi
+            if (danhSachUuDai != null && danhSachUuDai.Any())
             {
-                cbb_giamgia.Items.Clear(); // Xóa các mục cũ
-                foreach (var x in objUuDai)
-                {
-                    cbb_giamgia.Items.Add(x.Tenuudai);
-                }
-                cbb_giamgia.SelectedIndex = 0; // Chọn mục đầu tiên (nếu cần)
-            }
+                cbb_giamgia.Items.Clear(); // Xóa các mục cũ trong ComboBox
+                DateTime dateTime = DateTime.Now; // Lấy ngày hiện tại
 
-            //txtGiamGia.Text = objUuDai.Soluong <= 0 || objUuDai == null
-            //    ? "Đã hết ưu đãi"
-            //    : objUuDai.Phantram.ToString() + " % - " + objUuDai.Tenuudai.ToString();
+                foreach (var uuDai in danhSachUuDai)
+                {
+                    // Kiểm tra điều kiện thời gian áp dụng ưu đãi
+                    if (uuDai.Ngaybatdau <= dateTime && uuDai.Ngayketthuc >= dateTime)
+                    {
+                        cbb_giamgia.Items.Add(uuDai.Tenuudai);
+                    }
+                }
+
+                // Kiểm tra và đặt mục đầu tiên nếu có ưu đãi hợp lệ
+                if (cbb_giamgia.Items.Count > 0)
+                {
+                    cbb_giamgia.SelectedIndex = 0; // Chọn mục đầu tiên
+                }
+                else
+                {
+                    MessageBox.Show("Không có mã giảm giá nào đang áp dụng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Không có ưu đãi nào được tìm thấy!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
+
         private double TinhTongTien_HoaDon(DataGridView dataGridView)
         {
             double tongTien = 0;
@@ -594,6 +622,7 @@ namespace BanGiay.Form.US
             LoadSoTienNhan();
             cboxDungDiemKH_CheckedChanged(this, EventArgs.Empty);
         }
+
         private void LoadSoTienNhan()
         {
             if (txtSoTienNhan.Text == "")
@@ -602,18 +631,67 @@ namespace BanGiay.Form.US
                 txtSoTienThieu.Text = txtTongTien.Text;
                 txtSoTienThua.Text = "0";
             }
+
             if (double.TryParse(txtSoTienNhan.Text, out double soTienNhan))
             {
+                var objUuDai = _ser_UuDai.GetUudais(null);
+                if (objUuDai == null || !objUuDai.Any())
+                {
+                    MessageBox.Show("Không có ưu đãi nào đang áp dụng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
 
-                double tongTien = double.Parse(txtTongTien.Text);
+                // Lấy tên ưu đãi được chọn
+                var selectedUuDai = cbb_giamgia.SelectedItem?.ToString();
+
+                // Tìm ưu đãi khớp với tên được chọn
+                var uuDaiChon = objUuDai.FirstOrDefault(u => u.Tenuudai == selectedUuDai);
+                if (uuDaiChon == null)
+                {
+                    MessageBox.Show("Ưu đãi không tồn tại hoặc không hợp lệ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Lấy thông tin khách hàng
+                var maKhachHang = txtMaKhachhang.Text == "N/A" ? 1 :
+                    (int.TryParse(txtMaKhachhang.Text, out int result) ? result : 1);
+                var objKhachHang = _Ser_KhachHang.GetAllKhachhang(null).FirstOrDefault(x => x.Makhachhang == maKhachHang);
+
+                // Tính tổng tiền sản phẩm
+                float tongTienSanPham = (float)TinhTongTien_HoaDon(dgvHDCT);
+                txtTongTienSP.Text = tongTienSanPham.ToString("N0");
+
+                // Tính toán giảm giá
+                float phanTramUuDai = uuDaiChon.Soluong <= 0 ? 0 : (float)uuDaiChon.Phantram / 100;
+                float giamGia = tongTienSanPham * phanTramUuDai;
+
+                // Tính toán điểm khách hàng
+                float diemKhachHang = chbox_Dung_DiemKH.Checked && objKhachHang != null
+                    ? (objKhachHang.Diemkhachhang ?? 0) * 1000
+                    : 0;
+
+                // Tính tổng tiền cuối cùng
+                float tongTien = tongTienSanPham - giamGia - diemKhachHang;
+
+                // Cập nhật tổng tiền vào TextBox
+                txtTongTien.Text = tongTien.ToString("N0");
+
+
+
+
+                var x = _ser_UuDai.GetUudai_InTime().Phantram;
                 double soTienThua = soTienNhan - tongTien;
                 double soTienThieu = tongTien - soTienNhan;
 
-                txtSoTienThua.Text = soTienThua >= 0 ? soTienThua.ToString() : "0";
-                txtSoTienThieu.Text = soTienThieu >= 0 ? soTienThieu.ToString() : "0";
-                txtGhiChu.Text = $"khách đưa: {soTienNhan} - khách nhận: {(soTienThua >= 0 ? soTienThua.ToString() : "0")}";
+                txtSoTienThua.Text = soTienThua >= 0 ? soTienThua.ToString("N0") : "0";
+                txtSoTienThieu.Text = soTienThieu >= 0 ? soTienThieu.ToString("N0") : "0";
+                txtGhiChu.Text =
+                    $"khách đưa: {soTienNhan} - khách nhận: {(soTienThua >= 0 ? soTienThua.ToString("N0") : "0")}";
             }
         }
+
+        #region Dùng Điểm
+
         private void cboxDungDiemKH_CheckedChanged(object sender, EventArgs e)
         {
             LoadTien_ThanhToan();
@@ -635,12 +713,17 @@ namespace BanGiay.Form.US
             }
             else
             {
-                txtTongTien.Text = (tongTienSP - giamGia).ToString();
+                txtTongTien.Text = (tongTienSP - giamGia).ToString("N0");
                 LoadSoTienNhan();
                 string diemDungTruocDo = $" - Đã dùng {Obj.Diemkhachhang} điểm = {Obj.Diemkhachhang * 1000} VNĐ";
                 txtGhiChu.Text = txtGhiChu.Text.Replace(diemDungTruocDo, "");
             }
         }
+
+        #endregion
+
+        #region Thanh Toán Hóa Đơn
+
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
             if (cbbHinhThucThanhToan.SelectedIndex == 0)
@@ -659,7 +742,7 @@ namespace BanGiay.Form.US
             {
                 MessageBox.Show("Vui lòng chọn mã hóa đơn");
             }
-            else if (int.Parse(txtTongTienSP.Text) == 0 || txtTongTienSP.Text == "N/A")
+            else if (int.Parse(txtTongTienSP.Text.Replace(",", "")) == 0 || txtTongTienSP.Text == "N/A")
             {
                 MessageBox.Show("Vui lòng kiểm tra lại giỏ hàng!");
             }
@@ -771,6 +854,9 @@ namespace BanGiay.Form.US
                 LamMoi_ThanhToan();
             }
         }
+
+        #endregion
+
         private void txtDiemKH_TextChanged(object sender, EventArgs e)
         {
             if (txtDiem_KH.Text == "" || txtDiem_KH.Text == null)
@@ -782,24 +868,41 @@ namespace BanGiay.Form.US
                 chbox_Dung_DiemKH.Enabled = true;
             }
         }
+
+        #region Thanh toán tiền
+
         private void LoadTien_ThanhToan()
         {
-            var objUuDai = _ser_UuDai.GetUudais(null);
-            var Obj = _Ser_KhachHang.GetAllKhachhang(null).FirstOrDefault(x => x.Makhachhang == (txtMaKhachhang.Text == "N/A" ? 1 : int.Parse(txtMaKhachhang.Text)));
-            txtTongTienSP.Text = TinhTongTien_HoaDon(dgvHDCT).ToString();
-            foreach (var x in objUuDai)
-            {
-                if (cbb_giamgia.Text == x.Tenuudai)
-                {
-                    txtTongTien.Text = (TinhTongTien_HoaDon(dgvHDCT)
-                                        - (int.Parse(txtTongTienSP.Text)
-                                           * ((x.Soluong <= 0 ? 0 : float.Parse($"{x.Phantram * 0,01}"))))
-                                        - ((chbox_Dung_DiemKH.Checked ? (Obj.Diemkhachhang == null || txtDiem_KH.Text == "" ? 0 : Obj.Diemkhachhang) : 0)
-                                           * 1000)).ToString();
-                }
-            }
+            var objUuDai = _ser_UuDai.GetUudai_InTime();
+            var maKhachHang = txtMaKhachhang.Text == "N/A" ? 1 :
+                (int.TryParse(txtMaKhachhang.Text, out int result) ? result : 1);
+            var objKhachHang = _Ser_KhachHang.GetAllKhachhang(null).FirstOrDefault(x => x.Makhachhang == maKhachHang);
 
+            txtTongTienSP.Text = TinhTongTien_HoaDon(dgvHDCT).ToString("N0");
+
+            var selectedUuDai = cbb_giamgia.SelectedItem?.ToString();
+            if (selectedUuDai == objUuDai.Tenuudai)
+            {
+                float tongTienHoaDon = (float)TinhTongTien_HoaDon(dgvHDCT);
+                float phanTramUuDai = objUuDai.Soluong <= 0 ? 0 : (float)objUuDai.Phantram / 100;
+                float giamGia = tongTienHoaDon * phanTramUuDai;
+                float diemKhachHang = chbox_Dung_DiemKH.Checked && objKhachHang != null
+                    ? (objKhachHang.Diemkhachhang ?? 0) * 1000
+                    : 0;
+
+                float tongTien = tongTienHoaDon - giamGia - diemKhachHang;
+
+                txtTongTien.Text = tongTien.ToString("N0");
+            }
+            else
+            {
+                MessageBox.Show("Ưu đãi không tồn tại");
+            }
         }
+
+
+        #endregion
+
         private void btnXoaHoaDon_Click(object sender, EventArgs e)
         {
             try
@@ -841,7 +944,7 @@ namespace BanGiay.Form.US
                 {
                     MessageBox.Show("Đã hủy 'xóa' hóa đơn");
                 }
-                txtTongTienSP.Text = TinhTongTien_HoaDon(dgvHDCT).ToString();
+                txtTongTienSP.Text = TinhTongTien_HoaDon(dgvHDCT).ToString("N0");
                 LoadTien_ThanhToan();
             }
             catch (Exception ex)
@@ -904,5 +1007,59 @@ namespace BanGiay.Form.US
             txtTongTien.Text = "N/A";
             txtGhiChu.Text = "";
         }
+
+        private void cbb_giamgia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Kiểm tra nếu không có mục nào được chọn
+            if (cbb_giamgia.SelectedIndex == -1)
+            {
+                MessageBox.Show("Vui lòng chọn mã giảm giá!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Lấy thông tin ưu đãi hiện tại
+            var objUuDai = _ser_UuDai.GetUudais(null);
+            if (objUuDai == null || !objUuDai.Any())
+            {
+                MessageBox.Show("Không có ưu đãi nào đang áp dụng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // Lấy tên ưu đãi được chọn
+            var selectedUuDai = cbb_giamgia.SelectedItem?.ToString();
+
+            // Tìm ưu đãi khớp với tên được chọn
+            var uuDaiChon = objUuDai.FirstOrDefault(u => u.Tenuudai == selectedUuDai);
+            if (uuDaiChon == null)
+            {
+                MessageBox.Show("Ưu đãi không tồn tại hoặc không hợp lệ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Lấy thông tin khách hàng
+            var maKhachHang = txtMaKhachhang.Text == "N/A" ? 1 :
+                (int.TryParse(txtMaKhachhang.Text, out int result) ? result : 1);
+            var objKhachHang = _Ser_KhachHang.GetAllKhachhang(null).FirstOrDefault(x => x.Makhachhang == maKhachHang);
+
+            // Tính tổng tiền sản phẩm
+            float tongTienSanPham = (float)TinhTongTien_HoaDon(dgvHDCT);
+            txtTongTienSP.Text = tongTienSanPham.ToString("N0");
+
+            // Tính toán giảm giá
+            float phanTramUuDai = uuDaiChon.Soluong <= 0 ? 0 : (float)uuDaiChon.Phantram / 100;
+            float giamGia = tongTienSanPham * phanTramUuDai;
+
+            // Tính toán điểm khách hàng
+            float diemKhachHang = chbox_Dung_DiemKH.Checked && objKhachHang != null
+                ? (objKhachHang.Diemkhachhang ?? 0) * 1000
+                : 0;
+
+            // Tính tổng tiền cuối cùng
+            float tongTien = tongTienSanPham - giamGia - diemKhachHang;
+
+            // Cập nhật tổng tiền vào TextBox
+            txtTongTien.Text = tongTien.ToString("N0");
+        }
+
     }
 }

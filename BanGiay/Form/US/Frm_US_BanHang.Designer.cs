@@ -143,6 +143,7 @@
             cbb_giamgia.Name = "cbb_giamgia";
             cbb_giamgia.Size = new Size(218, 28);
             cbb_giamgia.TabIndex = 6;
+            cbb_giamgia.SelectedIndexChanged += cbb_giamgia_SelectedIndexChanged;
             // 
             // btnThanhToan
             // 

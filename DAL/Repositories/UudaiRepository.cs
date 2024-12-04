@@ -61,7 +61,7 @@ namespace DAL.Repositories
             var obj = dbContext.Uudais.Where(a =>a.Ngaybatdau <= now && a.Ngayketthuc >= now && a.Trangthai==2).FirstOrDefault() ;
             if(obj == null)
             {
-                return dbContext.Uudais.Where(a => a.Mauudai ==1).FirstOrDefault();
+                return dbContext.Uudais.Where(a => a.Mauudai == 1).FirstOrDefault();
             }
             return obj;
         }
