@@ -1,4 +1,5 @@
 ﻿using BUS.Services;
+using DAL.Migrations;
 using DAL.Models.Context;
 using DAL.Models.DomainClass;
 using DAL.Models.ModelRefer;
@@ -726,133 +727,104 @@ namespace BanGiay.Form.US
 
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
-            if (cbbHinhThucThanhToan.SelectedIndex == 0)
+            try
+            {
+                if (!KiemTraDieuKienThanhToan()) return;
+
+                var confirmResult = MessageBox.Show("Xác nhận 'thanh toán' hóa đơn không?", "Xác nhận", MessageBoxButtons.OKCancel);
+                if (confirmResult != DialogResult.OK)
+                {
+                    MessageBox.Show("Đã hủy 'thanh toán' hóa đơn");
+                    return;
+                }
+
+                // Xử lý cập nhật ưu đãi
+                var objUuDai = _ser_UuDai.GetUudai_InTime();
+                if (objUuDai.Soluong > 0)
+                {
+                    objUuDai.Soluong--;
+                    _ser_UuDai.Updateuudai(objUuDai);
+                }
+
+                // Cập nhật hóa đơn
+                var objHoaDon = _Ser_HoaDon.GetByID(int.Parse(txtMaHoaDon.Text));
+                objHoaDon.Trangthai = true;
+                objHoaDon.Mahinhthucthanhtoan = (int)cbbHinhThucThanhToan.SelectedValue;
+                objHoaDon.Tongtien = int.Parse(txtTongTien.Text.Replace(",", ""));
+                objHoaDon.Ghichu = txtGhiChu.Text;
+
+                var result = _Ser_HoaDon.Sua(int.Parse(txtMaHoaDon.Text), objHoaDon);
+
+                if (result)
+                {
+                    // Xử lý khách hàng nếu có
+                    if (txtTenKhachHang.Text != "N/A")
+                    {
+                        CapNhatThongTinKhachHang();
+                    }
+
+                    MessageBox.Show("Đã 'thanh toán' thành công hóa đơn");
+                    LoadGridHD(null, null);
+                    dgvHDCT.Rows.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("'Thanh toán' thất bại. Có gì đó sai sai");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Thông tin chi tiết: {ex}");
+                MessageBox.Show("Đã xảy ra lỗi khi thanh toán. Vui lòng thử lại!");
+            }
+
+            LamMoi_ThanhToan();
+        }
+
+        #endregion
+
+        #region Phương Thức Hỗ Trợ
+
+        private bool KiemTraDieuKienThanhToan()
+        {
+            if (cbbHinhThucThanhToan.SelectedIndex == -1)
             {
                 MessageBox.Show("Vui lòng lựa chọn hình thức thanh toán!");
+                return false;
             }
-            else if (txtSoTienThieu.Text == "N/A")
-            {
-                MessageBox.Show("Bạn chưa nhận tiền!");
-            }
-            else if (int.Parse(txtSoTienThieu.Text) > 0)
+            if (txtSoTienThieu.Text == "N/A" || int.Parse(txtSoTienThieu.Text.Replace(",", "")) > 0)
             {
                 MessageBox.Show("Bạn chưa nhận đủ tiền!");
+                return false;
             }
-            else if (txtMaHoaDon.Text == "N/A")
+            if (txtMaHoaDon.Text == "N/A")
             {
-                MessageBox.Show("Vui lòng chọn mã hóa đơn");
+                MessageBox.Show("Vui lòng chọn mã hóa đơn!");
+                return false;
             }
-            else if (int.Parse(txtTongTienSP.Text.Replace(",", "")) == 0 || txtTongTienSP.Text == "N/A")
+            if (int.Parse(txtTongTienSP.Text.Replace(",", "")) == 0 || txtTongTienSP.Text == "N/A")
             {
                 MessageBox.Show("Vui lòng kiểm tra lại giỏ hàng!");
+                return false;
             }
-            else if (txtTenKhachHang.Text == "N/A")
+            return true;
+        }
+
+        private void CapNhatThongTinKhachHang()
+        {
+            DBContext _db = new DBContext();
+            var objKhachHang = _db.Khachhangs.FirstOrDefault(a => a.Makhachhang == int.Parse(txtMaKhachhang.Text));
+            if (objKhachHang == null) return;
+
+            if (chbox_Dung_DiemKH.Checked)
             {
-                try
-                {
-                    var confirmResult = MessageBox.Show("Xác nhận 'thanh toán' hóa đơn mà không chọn 'khách hàng' không?", "Xác nhận", MessageBoxButtons.OKCancel);
-                    if (confirmResult == DialogResult.OK)
-                    {
-                        var objUuDai = _ser_UuDai.GetUudai_InTime();
-                        if (objUuDai.Soluong > 0)
-                        {
-                            objUuDai.Soluong = objUuDai.Soluong - 1;
-                        }
-                        var objHoaDon_ThanhToan = _Ser_HoaDon.GetByID(int.Parse(txtMaHoaDon.Text));
-                        objHoaDon_ThanhToan.Trangthai = true;
-                        objHoaDon_ThanhToan.Mahinhthucthanhtoan = (int)cbbHinhThucThanhToan.SelectedValue;
-                        objHoaDon_ThanhToan.Tongtien = int.Parse(txtTongTien.Text);
-                        objHoaDon_ThanhToan.Ghichu = txtGhiChu.Text;
-                        _ser_UuDai.Updateuudai(objUuDai);
-
-                        var result = _Ser_HoaDon.Sua(int.Parse(txtMaHoaDon.Text), objHoaDon_ThanhToan);
-
-                        if (result)
-                        {
-                            MessageBox.Show("Đã 'thanh toán' thành công hóa đơn");
-
-                            LoadGridHD(null, null);
-                            dgvHDCT.Rows.Clear();
-                        }
-                        else
-                        {
-                            MessageBox.Show("'Thanh toán' thất bại. Có gì đó sai sai");
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Đã hủy 'thanh toán' hóa đơn");
-                    }
-                }
-                catch (Exception ex)
-                {
-
-                    Console.WriteLine($"Thông tin chi tiết: {ex.ToString()}");
-                }
-                LamMoi_ThanhToan();
+                objKhachHang.Diemkhachhang = 0;
+                _Ser_KhachHang.UpdateKhachHang(objKhachHang);
             }
-            else
-            {
-                try
-                {
-                    var confirmResult = MessageBox.Show("Xác nhận 'thanh toán' hóa đơn không?", "Xác nhận", MessageBoxButtons.OKCancel);
-                    if (confirmResult == DialogResult.OK)
-                    {
-                        var objUuDai = _ser_UuDai.GetUudai_InTime();
-                        if (objUuDai.Soluong > 0)
-                        {
-                            objUuDai.Soluong = objUuDai.Soluong - 1;
-                        }
-                        var objHoaDon_ThanhToan = _Ser_HoaDon.GetByID(int.Parse(txtMaHoaDon.Text));
-                        objHoaDon_ThanhToan.Trangthai = true;
-                        objHoaDon_ThanhToan.Mahinhthucthanhtoan = (int)cbbHinhThucThanhToan.SelectedValue;
-                        objHoaDon_ThanhToan.Tongtien = int.Parse(txtTongTien.Text);
-                        objHoaDon_ThanhToan.Ghichu = txtGhiChu.Text;
-                        _ser_UuDai.Updateuudai(objUuDai);
 
-                        var result = _Ser_HoaDon.Sua(int.Parse(txtMaHoaDon.Text), objHoaDon_ThanhToan);
-
-                        if (result)
-                        {
-                            TimKhachhang_Frm formTimKhachHang = new TimKhachhang_Frm();
-                            DBContext _db = new();
-                            var objKhachhang = _db.Khachhangs.FirstOrDefault(a => a.Makhachhang == int.Parse(txtMaKhachhang.Text));
-                            if (chbox_Dung_DiemKH.Checked == true)
-                            {
-                                objKhachhang.Diemkhachhang = 0;
-                                _Ser_KhachHang.UpdateKhachHang(objKhachhang);
-                            }
-                            int? soluongMuaHang = 0;
-                            foreach (var item in _lstHoadonChiTiet)
-                            {
-                                soluongMuaHang += item.Hoadonchitiet.Soluongmua;
-                            }
-                            objKhachhang.Diemkhachhang = objKhachhang.Diemkhachhang + soluongMuaHang;
-                            _Ser_KhachHang.UpdateKhachHang(objKhachhang);
-
-                            MessageBox.Show("Đã 'thanh toán' thành công hóa đơn");
-
-                            LoadGridHD(null, null);
-                            dgvHDCT.Rows.Clear();
-
-                        }
-                        else
-                        {
-                            MessageBox.Show("'Thanh toán' thất bại. Có gì đó sai sai");
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Đã hủy 'thanh toán' hóa đơn");
-                    }
-                }
-                catch (Exception ex)
-                {
-
-                    Console.WriteLine($"Thông tin chi tiết: {ex.ToString()}");
-                }
-                LamMoi_ThanhToan();
-            }
+            int soluongMua = (int)_lstHoadonChiTiet.Sum(item => item.Hoadonchitiet.Soluongmua);
+            objKhachHang.Diemkhachhang += soluongMua;
+            _Ser_KhachHang.UpdateKhachHang(objKhachHang);
         }
 
         #endregion
