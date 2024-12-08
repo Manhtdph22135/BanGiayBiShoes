@@ -147,7 +147,7 @@
             // 
             // btnThanhToan
             // 
-            btnThanhToan.BackColor = Color.FromArgb(64, 79, 105);
+            btnThanhToan.BackColor = Color.LimeGreen;
             btnThanhToan.Cursor = Cursors.Hand;
             btnThanhToan.Dock = DockStyle.Bottom;
             btnThanhToan.FlatAppearance.BorderSize = 0;
@@ -236,7 +236,7 @@
             // 
             // btnChon_KhachHang
             // 
-            btnChon_KhachHang.BackColor = Color.FromArgb(64, 79, 105);
+            btnChon_KhachHang.BackColor = Color.LimeGreen;
             btnChon_KhachHang.Cursor = Cursors.Hand;
             btnChon_KhachHang.Dock = DockStyle.Right;
             btnChon_KhachHang.FlatAppearance.BorderSize = 0;
@@ -511,7 +511,7 @@
             // 
             // btnLamMoi_ID_HDCT
             // 
-            btnLamMoi_ID_HDCT.BackColor = Color.FromArgb(64, 79, 105);
+            btnLamMoi_ID_HDCT.BackColor = Color.LimeGreen;
             btnLamMoi_ID_HDCT.Cursor = Cursors.Hand;
             btnLamMoi_ID_HDCT.Dock = DockStyle.Right;
             btnLamMoi_ID_HDCT.FlatAppearance.BorderSize = 0;
@@ -582,7 +582,7 @@
             // 
             // btnXoa_HDCT
             // 
-            btnXoa_HDCT.BackColor = Color.FromArgb(64, 79, 105);
+            btnXoa_HDCT.BackColor = Color.LimeGreen;
             btnXoa_HDCT.Cursor = Cursors.Hand;
             btnXoa_HDCT.Dock = DockStyle.Right;
             btnXoa_HDCT.FlatAppearance.BorderSize = 0;
@@ -609,7 +609,7 @@
             // 
             // btnChontatCa
             // 
-            btnChontatCa.BackColor = Color.FromArgb(64, 79, 105);
+            btnChontatCa.BackColor = Color.LimeGreen;
             btnChontatCa.Cursor = Cursors.Hand;
             btnChontatCa.Dock = DockStyle.Right;
             btnChontatCa.FlatAppearance.BorderSize = 0;
@@ -669,7 +669,7 @@
             // 
             // btnTimKiem_SP
             // 
-            btnTimKiem_SP.BackColor = Color.FromArgb(64, 79, 105);
+            btnTimKiem_SP.BackColor = Color.LimeGreen;
             btnTimKiem_SP.Cursor = Cursors.Hand;
             btnTimKiem_SP.Dock = DockStyle.Left;
             btnTimKiem_SP.FlatAppearance.BorderSize = 0;
@@ -709,7 +709,7 @@
             // 
             // btnLamMoi
             // 
-            btnLamMoi.BackColor = Color.FromArgb(64, 79, 105);
+            btnLamMoi.BackColor = Color.LimeGreen;
             btnLamMoi.Cursor = Cursors.Hand;
             btnLamMoi.Dock = DockStyle.Right;
             btnLamMoi.FlatAppearance.BorderSize = 0;
@@ -768,7 +768,7 @@
             // 
             // btn_Xoa_HD
             // 
-            btn_Xoa_HD.BackColor = Color.FromArgb(64, 79, 105);
+            btn_Xoa_HD.BackColor = Color.LimeGreen;
             btn_Xoa_HD.Cursor = Cursors.Hand;
             btn_Xoa_HD.Dock = DockStyle.Right;
             btn_Xoa_HD.FlatAppearance.BorderSize = 0;
@@ -795,7 +795,7 @@
             // 
             // btnThem_HD
             // 
-            btnThem_HD.BackColor = Color.FromArgb(64, 79, 105);
+            btnThem_HD.BackColor = Color.LimeGreen;
             btnThem_HD.Cursor = Cursors.Hand;
             btnThem_HD.Dock = DockStyle.Right;
             btnThem_HD.FlatAppearance.BorderSize = 0;

@@ -72,8 +72,10 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Dock = DockStyle.Top;
             groupBox1.Location = new Point(0, 0);
+            groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(1094, 124);
+            groupBox1.Padding = new Padding(3, 4, 3, 4);
+            groupBox1.Size = new Size(1250, 165);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Thêm khách hàng";
@@ -81,15 +83,16 @@
             // btnThem
             // 
             btnThem.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnThem.BackColor = Color.FromArgb(64, 79, 105);
+            btnThem.BackColor = Color.LimeGreen;
             btnThem.Cursor = Cursors.Hand;
             btnThem.FlatAppearance.BorderSize = 0;
             btnThem.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 97, 120);
             btnThem.FlatStyle = FlatStyle.Flat;
             btnThem.ForeColor = Color.White;
-            btnThem.Location = new Point(689, 67);
+            btnThem.Location = new Point(787, 89);
+            btnThem.Margin = new Padding(3, 4, 3, 4);
             btnThem.Name = "btnThem";
-            btnThem.Size = new Size(93, 39);
+            btnThem.Size = new Size(106, 52);
             btnThem.TabIndex = 2;
             btnThem.Text = "Thêm";
             btnThem.UseVisualStyleBackColor = false;
@@ -98,15 +101,16 @@
             // btnSua
             // 
             btnSua.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnSua.BackColor = Color.FromArgb(64, 79, 105);
+            btnSua.BackColor = Color.LimeGreen;
             btnSua.Cursor = Cursors.Hand;
             btnSua.FlatAppearance.BorderSize = 0;
             btnSua.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 97, 120);
             btnSua.FlatStyle = FlatStyle.Flat;
             btnSua.ForeColor = Color.White;
-            btnSua.Location = new Point(788, 67);
+            btnSua.Location = new Point(901, 89);
+            btnSua.Margin = new Padding(3, 4, 3, 4);
             btnSua.Name = "btnSua";
-            btnSua.Size = new Size(93, 39);
+            btnSua.Size = new Size(106, 52);
             btnSua.TabIndex = 2;
             btnSua.Text = "Sửa";
             btnSua.UseVisualStyleBackColor = false;
@@ -115,15 +119,16 @@
             // btnKhoa_MoKhoa
             // 
             btnKhoa_MoKhoa.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnKhoa_MoKhoa.BackColor = Color.FromArgb(64, 79, 105);
+            btnKhoa_MoKhoa.BackColor = Color.LimeGreen;
             btnKhoa_MoKhoa.Cursor = Cursors.Hand;
             btnKhoa_MoKhoa.FlatAppearance.BorderSize = 0;
             btnKhoa_MoKhoa.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 97, 120);
             btnKhoa_MoKhoa.FlatStyle = FlatStyle.Flat;
             btnKhoa_MoKhoa.ForeColor = Color.White;
-            btnKhoa_MoKhoa.Location = new Point(887, 67);
+            btnKhoa_MoKhoa.Location = new Point(1014, 89);
+            btnKhoa_MoKhoa.Margin = new Padding(3, 4, 3, 4);
             btnKhoa_MoKhoa.Name = "btnKhoa_MoKhoa";
-            btnKhoa_MoKhoa.Size = new Size(102, 39);
+            btnKhoa_MoKhoa.Size = new Size(117, 52);
             btnKhoa_MoKhoa.TabIndex = 2;
             btnKhoa_MoKhoa.Text = "Khóa/Mở khóa";
             btnKhoa_MoKhoa.UseVisualStyleBackColor = false;
@@ -132,15 +137,16 @@
             // btnExcel
             // 
             btnExcel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnExcel.BackColor = Color.FromArgb(64, 79, 105);
+            btnExcel.BackColor = Color.LimeGreen;
             btnExcel.Cursor = Cursors.Hand;
             btnExcel.FlatAppearance.BorderSize = 0;
             btnExcel.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 97, 120);
             btnExcel.FlatStyle = FlatStyle.Flat;
             btnExcel.ForeColor = Color.White;
-            btnExcel.Location = new Point(995, 67);
+            btnExcel.Location = new Point(1137, 89);
+            btnExcel.Margin = new Padding(3, 4, 3, 4);
             btnExcel.Name = "btnExcel";
-            btnExcel.Size = new Size(93, 39);
+            btnExcel.Size = new Size(106, 52);
             btnExcel.TabIndex = 1;
             btnExcel.Text = "Excel";
             btnExcel.UseVisualStyleBackColor = false;
@@ -149,33 +155,36 @@
             // txtDiemKH
             // 
             txtDiemKH.BorderStyle = BorderStyle.FixedSingle;
-            txtDiemKH.Location = new Point(395, 75);
+            txtDiemKH.Location = new Point(451, 100);
+            txtDiemKH.Margin = new Padding(3, 4, 3, 4);
             txtDiemKH.Name = "txtDiemKH";
-            txtDiemKH.Size = new Size(225, 23);
+            txtDiemKH.Size = new Size(257, 27);
             txtDiemKH.TabIndex = 0;
             // 
             // txtSDT
             // 
             txtSDT.BorderStyle = BorderStyle.FixedSingle;
-            txtSDT.Location = new Point(430, 28);
+            txtSDT.Location = new Point(491, 37);
+            txtSDT.Margin = new Padding(3, 4, 3, 4);
             txtSDT.Name = "txtSDT";
-            txtSDT.Size = new Size(190, 23);
+            txtSDT.Size = new Size(217, 27);
             txtSDT.TabIndex = 0;
             // 
             // txtHoVaTen
             // 
             txtHoVaTen.BorderStyle = BorderStyle.FixedSingle;
-            txtHoVaTen.Location = new Point(92, 75);
+            txtHoVaTen.Location = new Point(105, 100);
+            txtHoVaTen.Margin = new Padding(3, 4, 3, 4);
             txtHoVaTen.Name = "txtHoVaTen";
-            txtHoVaTen.Size = new Size(225, 23);
+            txtHoVaTen.Size = new Size(257, 27);
             txtHoVaTen.TabIndex = 0;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(328, 79);
+            label4.Location = new Point(375, 105);
             label4.Name = "label4";
-            label4.Size = new Size(38, 15);
+            label4.Size = new Size(48, 20);
             label4.TabIndex = 0;
             label4.Text = "Điểm:";
             // 
@@ -183,35 +192,36 @@
             // 
             txtMaKhachHang.BorderStyle = BorderStyle.FixedSingle;
             txtMaKhachHang.Enabled = false;
-            txtMaKhachHang.Location = new Point(127, 28);
+            txtMaKhachHang.Location = new Point(145, 37);
+            txtMaKhachHang.Margin = new Padding(3, 4, 3, 4);
             txtMaKhachHang.Name = "txtMaKhachHang";
-            txtMaKhachHang.Size = new Size(190, 23);
+            txtMaKhachHang.Size = new Size(217, 27);
             txtMaKhachHang.TabIndex = 0;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(328, 32);
+            label3.Location = new Point(375, 43);
             label3.Name = "label3";
-            label3.Size = new Size(79, 15);
+            label3.Size = new Size(100, 20);
             label3.TabIndex = 0;
             label3.Text = "Số điện thoại:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(25, 79);
+            label2.Location = new Point(29, 105);
             label2.Name = "label2";
-            label2.Size = new Size(61, 15);
+            label2.Size = new Size(76, 20);
             label2.TabIndex = 0;
             label2.Text = "Họ và tên:";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(25, 32);
+            label1.Location = new Point(29, 43);
             label1.Name = "label1";
-            label1.Size = new Size(92, 15);
+            label1.Size = new Size(112, 20);
             label1.TabIndex = 0;
             label1.Text = "Mã khách hàng:";
             // 
@@ -219,9 +229,11 @@
             // 
             groupBox2.Controls.Add(dgvHD);
             groupBox2.Dock = DockStyle.Bottom;
-            groupBox2.Location = new Point(0, 457);
+            groupBox2.Location = new Point(0, 609);
+            groupBox2.Margin = new Padding(3, 4, 3, 4);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(1094, 276);
+            groupBox2.Padding = new Padding(3, 4, 3, 4);
+            groupBox2.Size = new Size(1250, 368);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Hóa đon đã mua";
@@ -231,10 +243,12 @@
             dgvHD.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvHD.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvHD.Dock = DockStyle.Fill;
-            dgvHD.Location = new Point(3, 19);
+            dgvHD.Location = new Point(3, 24);
+            dgvHD.Margin = new Padding(3, 4, 3, 4);
             dgvHD.Name = "dgvHD";
+            dgvHD.RowHeadersWidth = 51;
             dgvHD.RowTemplate.Height = 25;
-            dgvHD.Size = new Size(1088, 254);
+            dgvHD.Size = new Size(1244, 340);
             dgvHD.TabIndex = 0;
             // 
             // groupBox3
@@ -242,9 +256,11 @@
             groupBox3.Controls.Add(dgvKH);
             groupBox3.Controls.Add(panel1);
             groupBox3.Dock = DockStyle.Fill;
-            groupBox3.Location = new Point(0, 124);
+            groupBox3.Location = new Point(0, 165);
+            groupBox3.Margin = new Padding(3, 4, 3, 4);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(1094, 333);
+            groupBox3.Padding = new Padding(3, 4, 3, 4);
+            groupBox3.Size = new Size(1250, 444);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
             groupBox3.Text = "Khách hàng";
@@ -254,10 +270,12 @@
             dgvKH.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvKH.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvKH.Dock = DockStyle.Fill;
-            dgvKH.Location = new Point(3, 57);
+            dgvKH.Location = new Point(3, 75);
+            dgvKH.Margin = new Padding(3, 4, 3, 4);
             dgvKH.Name = "dgvKH";
+            dgvKH.RowHeadersWidth = 51;
             dgvKH.RowTemplate.Height = 25;
-            dgvKH.Size = new Size(1088, 273);
+            dgvKH.Size = new Size(1244, 365);
             dgvKH.TabIndex = 1;
             dgvKH.CellClick += dgvKH_CellClick;
             // 
@@ -266,39 +284,42 @@
             panel1.Controls.Add(txtTimKiem_KhachHang);
             panel1.Controls.Add(label5);
             panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(3, 19);
+            panel1.Location = new Point(3, 24);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1088, 38);
+            panel1.Size = new Size(1244, 51);
             panel1.TabIndex = 0;
             // 
             // txtTimKiem_KhachHang
             // 
             txtTimKiem_KhachHang.BorderStyle = BorderStyle.FixedSingle;
-            txtTimKiem_KhachHang.Location = new Point(71, 9);
+            txtTimKiem_KhachHang.Location = new Point(81, 12);
+            txtTimKiem_KhachHang.Margin = new Padding(3, 4, 3, 4);
             txtTimKiem_KhachHang.Name = "txtTimKiem_KhachHang";
             txtTimKiem_KhachHang.PlaceholderText = "Tìm kiếm...";
-            txtTimKiem_KhachHang.Size = new Size(333, 23);
+            txtTimKiem_KhachHang.Size = new Size(380, 27);
             txtTimKiem_KhachHang.TabIndex = 0;
             txtTimKiem_KhachHang.TextChanged += txtTimkiem_TextChanged;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(4, 13);
+            label5.Location = new Point(5, 17);
             label5.Name = "label5";
-            label5.Size = new Size(59, 15);
+            label5.Size = new Size(73, 20);
             label5.TabIndex = 0;
             label5.Text = "Tìm kiếm:";
             // 
             // Frm_US_KhachHang
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Frm_US_KhachHang";
-            Size = new Size(1094, 733);
+            Size = new Size(1250, 977);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);

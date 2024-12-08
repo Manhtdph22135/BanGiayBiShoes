@@ -64,21 +64,24 @@
             groupBox1.Dock = DockStyle.Top;
             groupBox1.ForeColor = Color.White;
             groupBox1.Location = new Point(0, 0);
+            groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(1094, 166);
+            groupBox1.Padding = new Padding(3, 4, 3, 4);
+            groupBox1.Size = new Size(1250, 221);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Thống kê";
             // 
             // panel3
             // 
-            panel3.BackColor = Color.FromArgb(78, 101, 130);
+            panel3.BackColor = Color.LimeGreen;
             panel3.Controls.Add(lbTongSP);
             panel3.Controls.Add(label6);
             panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(353, 19);
+            panel3.Location = new Point(403, 24);
+            panel3.Margin = new Padding(3, 4, 3, 4);
             panel3.Name = "panel3";
-            panel3.Size = new Size(377, 144);
+            panel3.Size = new Size(431, 193);
             panel3.TabIndex = 2;
             // 
             // lbTongSP
@@ -86,9 +89,9 @@
             lbTongSP.Anchor = AnchorStyles.None;
             lbTongSP.AutoSize = true;
             lbTongSP.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            lbTongSP.Location = new Point(171, 79);
+            lbTongSP.Location = new Point(195, 106);
             lbTongSP.Name = "lbTongSP";
-            lbTongSP.Size = new Size(35, 32);
+            lbTongSP.Size = new Size(42, 41);
             lbTongSP.TabIndex = 1;
             lbTongSP.Text = "...";
             // 
@@ -97,30 +100,31 @@
             label6.Anchor = AnchorStyles.None;
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.Location = new Point(93, 33);
+            label6.Location = new Point(106, 44);
             label6.Name = "label6";
-            label6.Size = new Size(190, 32);
+            label6.Size = new Size(234, 41);
             label6.TabIndex = 2;
             label6.Text = "Tổng sản phẩm";
             // 
             // panel2
             // 
-            panel2.BackColor = Color.FromArgb(78, 101, 130);
+            panel2.BackColor = Color.LimeGreen;
             panel2.Controls.Add(lbTonghoadon);
             panel2.Controls.Add(label8);
             panel2.Dock = DockStyle.Right;
-            panel2.Location = new Point(730, 19);
+            panel2.Location = new Point(834, 24);
+            panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(361, 144);
+            panel2.Size = new Size(413, 193);
             panel2.TabIndex = 1;
             // 
             // lbTonghoadon
             // 
             lbTonghoadon.AutoSize = true;
             lbTonghoadon.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            lbTonghoadon.Location = new Point(163, 79);
+            lbTonghoadon.Location = new Point(186, 105);
             lbTonghoadon.Name = "lbTonghoadon";
-            lbTonghoadon.Size = new Size(35, 32);
+            lbTonghoadon.Size = new Size(42, 41);
             lbTonghoadon.TabIndex = 1;
             lbTonghoadon.Text = "...";
             // 
@@ -128,30 +132,31 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            label8.Location = new Point(93, 33);
+            label8.Location = new Point(106, 44);
             label8.Name = "label8";
-            label8.Size = new Size(174, 32);
+            label8.Size = new Size(215, 41);
             label8.TabIndex = 2;
             label8.Text = "Tổng hóa đơn";
             // 
             // panel1
             // 
-            panel1.BackColor = Color.FromArgb(78, 101, 130);
+            panel1.BackColor = Color.LimeGreen;
             panel1.Controls.Add(lbTongtien);
             panel1.Controls.Add(label4);
             panel1.Dock = DockStyle.Left;
-            panel1.Location = new Point(3, 19);
+            panel1.Location = new Point(3, 24);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(350, 144);
+            panel1.Size = new Size(400, 193);
             panel1.TabIndex = 0;
             // 
             // lbTongtien
             // 
             lbTongtien.AutoSize = true;
             lbTongtien.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            lbTongtien.Location = new Point(154, 79);
+            lbTongtien.Location = new Point(176, 105);
             lbTongtien.Name = "lbTongtien";
-            lbTongtien.Size = new Size(35, 32);
+            lbTongtien.Size = new Size(42, 41);
             lbTongtien.TabIndex = 1;
             lbTongtien.Text = "...";
             // 
@@ -159,9 +164,9 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(113, 33);
+            label4.Location = new Point(129, 44);
             label4.Name = "label4";
-            label4.Size = new Size(124, 32);
+            label4.Size = new Size(154, 41);
             label4.TabIndex = 2;
             label4.Text = "Tổng tiền";
             // 
@@ -173,24 +178,27 @@
             groupBox2.Controls.Add(datebatdau);
             groupBox2.Controls.Add(label1);
             groupBox2.Dock = DockStyle.Top;
-            groupBox2.Location = new Point(0, 166);
+            groupBox2.Location = new Point(0, 221);
+            groupBox2.Margin = new Padding(3, 4, 3, 4);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(1094, 87);
+            groupBox2.Padding = new Padding(3, 4, 3, 4);
+            groupBox2.Size = new Size(1250, 116);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Tìm kiếm";
             // 
             // btnTimkiem
             // 
-            btnTimkiem.BackColor = Color.FromArgb(64, 79, 105);
+            btnTimkiem.BackColor = Color.LimeGreen;
             btnTimkiem.FlatAppearance.BorderSize = 0;
             btnTimkiem.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 97, 120);
             btnTimkiem.FlatStyle = FlatStyle.Flat;
             btnTimkiem.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             btnTimkiem.ForeColor = Color.White;
-            btnTimkiem.Location = new Point(866, 22);
+            btnTimkiem.Location = new Point(990, 29);
+            btnTimkiem.Margin = new Padding(3, 4, 3, 4);
             btnTimkiem.Name = "btnTimkiem";
-            btnTimkiem.Size = new Size(131, 52);
+            btnTimkiem.Size = new Size(150, 69);
             btnTimkiem.TabIndex = 6;
             btnTimkiem.Text = "Tìm kiếm";
             btnTimkiem.UseVisualStyleBackColor = false;
@@ -198,33 +206,35 @@
             // 
             // dateketthuc
             // 
-            dateketthuc.Location = new Point(641, 36);
+            dateketthuc.Location = new Point(733, 48);
+            dateketthuc.Margin = new Padding(3, 4, 3, 4);
             dateketthuc.Name = "dateketthuc";
-            dateketthuc.Size = new Size(200, 23);
+            dateketthuc.Size = new Size(228, 27);
             dateketthuc.TabIndex = 4;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(608, 39);
+            label2.Location = new Point(695, 52);
             label2.Name = "label2";
-            label2.Size = new Size(27, 15);
+            label2.Size = new Size(34, 20);
             label2.TabIndex = 2;
             label2.Text = "đến";
             // 
             // datebatdau
             // 
-            datebatdau.Location = new Point(374, 36);
+            datebatdau.Location = new Point(427, 48);
+            datebatdau.Margin = new Padding(3, 4, 3, 4);
             datebatdau.Name = "datebatdau";
-            datebatdau.Size = new Size(200, 23);
+            datebatdau.Size = new Size(228, 27);
             datebatdau.TabIndex = 5;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(333, 39);
+            label1.Location = new Point(381, 52);
             label1.Name = "label1";
-            label1.Size = new Size(35, 15);
+            label1.Size = new Size(44, 20);
             label1.TabIndex = 3;
             label1.Text = "Ngày";
             // 
@@ -232,9 +242,11 @@
             // 
             groupBox3.Controls.Add(dgvSP_BanChay);
             groupBox3.Dock = DockStyle.Fill;
-            groupBox3.Location = new Point(0, 253);
+            groupBox3.Location = new Point(0, 337);
+            groupBox3.Margin = new Padding(3, 4, 3, 4);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(1094, 480);
+            groupBox3.Padding = new Padding(3, 4, 3, 4);
+            groupBox3.Size = new Size(1250, 640);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
             groupBox3.Text = "Top sản phẩm bán chạy";
@@ -244,21 +256,24 @@
             dgvSP_BanChay.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvSP_BanChay.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvSP_BanChay.Dock = DockStyle.Fill;
-            dgvSP_BanChay.Location = new Point(3, 19);
+            dgvSP_BanChay.Location = new Point(3, 24);
+            dgvSP_BanChay.Margin = new Padding(3, 4, 3, 4);
             dgvSP_BanChay.Name = "dgvSP_BanChay";
+            dgvSP_BanChay.RowHeadersWidth = 51;
             dgvSP_BanChay.RowTemplate.Height = 25;
-            dgvSP_BanChay.Size = new Size(1088, 458);
+            dgvSP_BanChay.Size = new Size(1244, 612);
             dgvSP_BanChay.TabIndex = 0;
             // 
             // Frm_US_ThongKe
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Frm_US_ThongKe";
-            Size = new Size(1094, 733);
+            Size = new Size(1250, 977);
             groupBox1.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();

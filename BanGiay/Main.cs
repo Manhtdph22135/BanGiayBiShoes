@@ -118,34 +118,14 @@ namespace BanGiay
         }
         private void btnLuong_Click(object sender, EventArgs e)
         {
-            if (tenChucVu == "Quản Lý")
-            {
-                Frm_US_BangLuong US_Luong = new Frm_US_BangLuong();
-                Load_Usercontrol(US_Luong);
-                ActivateButton(sender);
-            }
-            else
-            {
 
-                MessageBox.Show("Bạn là nhận viên không thể dùng chức năng quản lý 'lương'!");
-            }
+            MessageBox.Show("Chức năng đang phát triển");
 
 
         }
         private void btnGiaoCa_Click(object sender, EventArgs e)
         {
-            if (tenChucVu == "Quản Lý")
-            {
-                Frm_US_GiaoCa US_GiaoCa = new Frm_US_GiaoCa();
-                Load_Usercontrol(US_GiaoCa);
-                ActivateButton(sender);
-            }
-            else
-            {
-
-                MessageBox.Show("Bạn là nhận viên không thể dùng chức năng 'giao ca'!");
-            }
-
+            MessageBox.Show("Chức năng đang phát triển");
 
         }
         private void btnDangXuat_Click(object sender, EventArgs e)
