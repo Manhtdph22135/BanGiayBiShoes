@@ -481,7 +481,7 @@
             // btnLamMoi
             // 
             btnLamMoi.Anchor = AnchorStyles.None;
-            btnLamMoi.BackColor = Color.FromArgb(64, 79, 105);
+            btnLamMoi.BackColor = Color.LimeGreen;
             btnLamMoi.Cursor = Cursors.Hand;
             btnLamMoi.FlatAppearance.BorderSize = 0;
             btnLamMoi.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 97, 120);
@@ -500,7 +500,7 @@
             // btnKhoa_MoKhoa
             // 
             btnKhoa_MoKhoa.Anchor = AnchorStyles.None;
-            btnKhoa_MoKhoa.BackColor = Color.FromArgb(64, 79, 105);
+            btnKhoa_MoKhoa.BackColor = Color.LimeGreen;
             btnKhoa_MoKhoa.Cursor = Cursors.Hand;
             btnKhoa_MoKhoa.FlatAppearance.BorderSize = 0;
             btnKhoa_MoKhoa.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 97, 120);
@@ -519,7 +519,7 @@
             // btnSua
             // 
             btnSua.Anchor = AnchorStyles.None;
-            btnSua.BackColor = Color.FromArgb(64, 79, 105);
+            btnSua.BackColor = Color.LimeGreen;
             btnSua.Cursor = Cursors.Hand;
             btnSua.FlatAppearance.BorderSize = 0;
             btnSua.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 97, 120);
@@ -538,7 +538,7 @@
             // btnThem
             // 
             btnThem.Anchor = AnchorStyles.None;
-            btnThem.BackColor = Color.FromArgb(64, 79, 105);
+            btnThem.BackColor = Color.LimeGreen;
             btnThem.Cursor = Cursors.Hand;
             btnThem.FlatAppearance.BorderSize = 0;
             btnThem.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 97, 120);
